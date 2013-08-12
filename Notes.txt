@@ -1,0 +1,28 @@
+.\mongoimport.exe --db pcat -c products --file products.json
+
+update({"_id" : ObjectId("507d95d5719dbef170f15c00")},{ "_id" : ObjectId("507d95d5719dbef170f15c00"),"term_years":3,"limits.sms.over_rate":0.01})
+
+update({"_id" : ObjectId("507d95d5719dbef170f15c00")},{ $set : {"term_years":3})
+
+> db.products.update( { _id: ObjectId("507d95d5719dbef170f15c00") }, { $set: { "term_years": 3, "limits.sms.over_rate":"0.01" } } );
+
+db.products.find({"limits.voice":{$exists: true}}).count();
+
+db.products.ensureIndex( { "for": 1 } );
+db.products.find({for:"ac3"}).count()
+db.products.update( {for:"ac3"}, { $inc: { "price": 2} } );
+
+db.products.update( {for:"ac3"}, { $inc: { "price": 2} } , { multi: true });
+
+db.collection.update( { name: "John" }, { $inc: { age: 2 } }, { multi: true } );
+
+=================================================================================================
+Week 3
+Schema Design
+=================================================================================================
+
+.\mongod.exe --replSet abc --dbpath=D:\xampp\htdocs\mongodb\bin\1 --port 27001 --oplogSize 50 --logpath log.1 --logappend
+
+cfg = {"_id" : "abc","members" : [{"_id":0,"host":"localhost:27001"},{ "_id":1,"host":"localhost:27002"},{"_id":2,"host":"localhost:27003"}]}
+
+
